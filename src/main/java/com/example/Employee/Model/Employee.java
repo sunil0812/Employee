@@ -21,6 +21,7 @@ public class Employee {
     private String mail;
 
     private String companyName;
+    
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "vendorId" , referencedColumnName = "vendorId")
