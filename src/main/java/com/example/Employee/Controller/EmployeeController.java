@@ -19,8 +19,9 @@ public class EmployeeController {
     private EmployeServ employeServ;
 
     @PostMapping(value = "/saveEmployee")
-    public ResponseEntity<BaseResponse> saveemployee(@RequestBody EmployeeDTO emp, VendorDto vendorDto) {
-    return new ResponseEntity<>(employeServ.saveEmployee(emp,vendorDto),HttpStatus.OK);
+    public BaseResponse saveemployee(@RequestBody EmployeeDTO emp, VendorDto vendorDto) {
+    return (employeServ.saveEmployee(emp,vendorDto));
+
     }
     @GetMapping(value="/getemployee")
     public List<Employee> listallemployee(){
@@ -37,6 +38,8 @@ public class EmployeeController {
              employeServ.deleteemployebyid(id);
         System.out.println("1234rfdcxz");
         }
+
+
 
 
 
