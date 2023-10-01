@@ -35,6 +35,7 @@ public class Employee implements Serializable {
     private String mail;
     private String companyName;
 
+
     @Column(name = "interviewDetails", columnDefinition = "jsonb")
     @Type(type = "jsonb")
     private InterviewDeatils interviewDetails;
