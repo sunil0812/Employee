@@ -33,7 +33,6 @@ public class Employee implements Serializable {
     @Column(name = "mail")
     @Pattern(regexp = "^.*[A-Za-z0-9.@-]*$")
     private String mail;
-
     private String companyName;
 
     @Column(name = "interviewDetails", columnDefinition = "jsonb")
