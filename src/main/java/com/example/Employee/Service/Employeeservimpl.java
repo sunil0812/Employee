@@ -36,7 +36,6 @@ public class Employeeservimpl implements EmployeServ {
                 throw new RuntimeException("Email Already Exists");
 
             }
-
             Employee employee1 = new Employee();
             employee1.setMail(emp.getMail());
             employee1.setName(emp.getName());
