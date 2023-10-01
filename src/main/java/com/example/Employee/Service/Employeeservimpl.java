@@ -45,15 +45,15 @@ public class Employeeservimpl implements EmployeServ {
             employee1.setCompanyName(emp.getCompanyName());
             employee1.setInterviewDetails(emp.getInterviewDetails());
             VendorDetails vendors = vendorRepo.findByName(emp.getCompanyName());
-            System.out.println(vendors);
             employee1.setVendorId(vendors);
 
             employeerepo.save(employee1);
+            log.info("New Employee Added Successfully");
             BaseResponse baseResponse = new BaseResponse();
             baseResponse.setStatus("Data saved Success");
             baseResponse.setMessage(HttpStatus.OK.name());
             baseResponse.setCode(HttpServletResponse.SC_ACCEPTED);
-            log.info("New Employee Added Successfully");
+
             return baseResponse;
         } catch (RuntimeException e) {
             e.printStackTrace();
