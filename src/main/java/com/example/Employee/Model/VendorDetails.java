@@ -4,8 +4,6 @@ package com.example.Employee.Model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "vendor")
@@ -14,7 +12,7 @@ public class VendorDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long vendorId;
 
     private String name;
 
