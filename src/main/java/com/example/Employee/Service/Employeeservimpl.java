@@ -32,19 +32,12 @@ public class Employeeservimpl implements EmployeServ {
     public BaseResponse saveEmployee(EmployeeDTO emp, VendorDto vendorDto) throws RuntimeException {
 
         try {
-//            if (employeerepo.findByMail(emp.getMail()) == null) {
-//                throw new RuntimeException("Email Already Exists");
-//
-//            }
+            if (employeerepo.findByMail(emp.getMail()) == null) {
+                throw new RuntimeException("Email Already Exists");
 
+            }
 
             Employee employee1 = new Employee();
-
-
-
-            System.out.println(emp.getCompanyName());
-            System.out.println(emp.getNumber());
-
 
             employee1.setMail(emp.getMail());
             employee1.setName(emp.getName());
@@ -55,12 +48,12 @@ public class Employeeservimpl implements EmployeServ {
             System.out.println(vendors);
             employee1.setVendorId(vendors);
 
-
             employeerepo.save(employee1);
             BaseResponse baseResponse = new BaseResponse();
             baseResponse.setStatus("Data saved Success");
             baseResponse.setMessage(HttpStatus.OK.name());
             baseResponse.setCode(HttpServletResponse.SC_ACCEPTED);
+            log.info("New Employee Added Successfully");
             return baseResponse;
         } catch (RuntimeException e) {
             e.printStackTrace();
