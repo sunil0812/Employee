@@ -38,7 +38,6 @@ public class Employeeservimpl implements EmployeServ {
             }
 
             Employee employee1 = new Employee();
-
             employee1.setMail(emp.getMail());
             employee1.setName(emp.getName());
             employee1.setNumber(emp.getNumber());
