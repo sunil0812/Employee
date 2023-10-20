@@ -9,6 +9,7 @@ import com.example.Employee.Model.InterviewDeatils;
 import com.example.Employee.Model.VendorDetails;
 import com.example.Employee.Repo.Employeerepo;
 import com.example.Employee.Repo.VendorRepo;
+import com.example.Employee.exception.EmailAlreadyExists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,11 +30,13 @@ public class Employeeservimpl implements EmployeServ {
     private VendorRepo vendorRepo;
 
     @Override
-    public BaseResponse saveEmployee(EmployeeDTO emp, VendorDto vendorDto) throws RuntimeException {
+    public BaseResponse saveEmployee(EmployeeDTO emp, VendorDto vendorDto){
 
         try {
-            if (employeerepo.findByMail(emp.getMail()) == null) {
-                throw new RuntimeException("Email Already Exists");
+            Employee employee = employeerepo.findByMail(emp.getMail());
+
+            if ( employee != null) {
+                throw new EmailAlreadyExists("Email Already Exists",409);
 
             }
             Employee employee1 = new Employee();
@@ -55,6 +58,8 @@ public class Employeeservimpl implements EmployeServ {
             return baseResponse;
         } catch (RuntimeException e) {
             e.printStackTrace();
+        } catch (EmailAlreadyExists e) {
+            throw new RuntimeException(e);
         }
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setCode(HttpStatus.BAD_REQUEST.value());
