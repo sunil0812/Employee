@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -28,6 +27,10 @@ public class Employeeservimpl implements EmployeServ {
 
     @Autowired
     private VendorRepo vendorRepo;
+
+
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public BaseResponse saveEmployee(EmployeeDTO emp, VendorDto vendorDto){
@@ -49,22 +52,20 @@ public class Employeeservimpl implements EmployeServ {
             employee1.setVendorId(vendors);
 
             employeerepo.save(employee1);
-            log.info("New Employee Added Successfully");
-            BaseResponse baseResponse = new BaseResponse();
-            baseResponse.setStatus("Data saved Success");
-            baseResponse.setMessage(HttpStatus.OK.name());
-            baseResponse.setCode(HttpServletResponse.SC_ACCEPTED);
 
-            return baseResponse;
+            log.info("New Employee Added Successfully");
+            emailService.EmailSend(emp.getMail(),"Employee Added","Your welcome");
         } catch (RuntimeException e) {
             e.printStackTrace();
         } catch (EmailAlreadyExists e) {
             throw new RuntimeException(e);
         }
+
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setCode(HttpStatus.BAD_REQUEST.value());
-        baseResponse.setCode(HttpServletResponse.SC_BAD_GATEWAY);
-        baseResponse.setStatus(HttpStatus.BAD_REQUEST.name());
+        baseResponse.setStatus("Data saved Success");
+        baseResponse.setMessage(HttpStatus.ACCEPTED.name());
+        baseResponse.setCode(HttpStatus.ACCEPTED.value());
+
         return baseResponse;
     }
 
