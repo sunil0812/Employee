@@ -10,6 +10,7 @@ import com.example.Employee.Model.VendorDetails;
 import com.example.Employee.Repo.Employeerepo;
 import com.example.Employee.Repo.VendorRepo;
 import com.example.Employee.exception.EmailAlreadyExists;
+import com.example.Employee.utility.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
